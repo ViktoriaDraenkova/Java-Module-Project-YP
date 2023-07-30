@@ -14,38 +14,39 @@ class Product {
 
 class Calculator {
     float sum;
-    ArrayList<String> prod = new ArrayList<>();
+    ArrayList<String> products = new ArrayList<>();
 
     Calculator() {
 
     }
 
-    public void addProduct(Product pr) {
-        prod.add( "\n" + pr.name + " " + Float.toString(pr.cost) + "\n");
-        sum += pr.cost;
+    public void addProduct(Product product) {
+        products.add( "\n" + product.name + " " + Float.toString(product.cost) + "\n");
+        sum += product.cost;
     }
 
-    public void Print() {
-        if (prod.size() == 0) {
+    public void print() {
+        if (products.size() == 0) {
             System.out.println("Дорогой пользователь, ты не ввёл ни одного товара!");
             return;
         }
-        System.out.println(prod);
+        System.out.println(products);
     }
 }
 
 
 class Formatter{
-    public static String Format(double sum, int  amount){
+    public static String format(double sum, int  amount){
         int digit= (int) ((sum/amount)%10);
-        if(digit==1){
-            return "рубль";
-        }
-        else if(digit==2 || digit==3 || digit==4){
-            return "рубля";
-        }
-        else {
-            return "рублей";
+        switch (digit){
+            case 1:
+                return "рубль";
+            case 2:
+            case 3:
+            case 4:
+                return "рубля";
+            default:
+                return "рублей";
         }
     }
 }
@@ -92,17 +93,17 @@ class Main {
                     float cost;
                     if (scanner.hasNextFloat()) {
                         cost = scanner.nextFloat();
-                        Product prod = new Product(cost, name);
-                        calc.addProduct(prod);
+                        Product product = new Product(cost, name);
+                        calc.addProduct(product);
                     } else {
                         System.out.println("Дорогой пользователь, введи корректную цену товара)");
                     }
                     break;
                 case "2":
-                    calc.Print();
+                    calc.print();
                     float numb =  (calc.sum/amount);
                     String formated = String.format("%.2f",numb);
-                    System.out.println("Пока каждый из вашей компании должен будет за товары " + formated+ " "  + Formatter.Format(calc.sum, amount));
+                    System.out.println("Пока каждый из вашей компании должен будет за товары " + formated+ " "  + Formatter.format(calc.sum, amount));
                     break;
                 case "завершить":
                     scanner.close();
