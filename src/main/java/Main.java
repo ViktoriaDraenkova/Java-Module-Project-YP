@@ -36,14 +36,18 @@ class Main {
                     System.out.println("Введите наименование товара, который хотите приобрести");
                     String name = scanner.next();
                     System.out.println("Введите цену товара, который хотите приобрести");
-                    float cost;
-                    if (scanner.hasNextFloat()) {
-                        cost = scanner.nextFloat();
-                        Product product = new Product(cost, name);
-                        calc.addProduct(product);
-                    } else {
-                        System.out.println("Дорогой пользователь, введи корректную цену товара)");
+                    float cost=-1;
+                    do {
+                        if (scanner.hasNextFloat()) {
+                            cost = scanner.nextFloat();
+                            Product product = new Product(cost, name);
+                            calc.addProduct(product);
+                        } else {
+                            System.out.println("Дорогой пользователь, введи корректную цену товара)");
+                            String deleter = scanner.next();
+                        }
                     }
+                   while (cost<0);
                     break;
                 
                 case "2":
