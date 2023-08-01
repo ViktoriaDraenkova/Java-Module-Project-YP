@@ -62,7 +62,7 @@ class Main {
                     return;
 
                 default:
-                    throw new IllegalStateException("Unexpected value: " + num);
+                    System.out.println("Дорогой друг, у тебя повылазило?) Ну нет такого пункта меню)");
             }
         }
     }
